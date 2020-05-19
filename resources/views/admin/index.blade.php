@@ -1,7 +1,7 @@
 @extends('layouts.admin')
 @section('content')
 
-        <div class="main-panel" id="main-panel">
+
             <div class="panel-header panel-header-lg">
                 <canvas id="bigDashboardChart"></canvas>
             </div>
@@ -267,5 +267,14 @@
                     </div>
                 </div>
             </div>
-        </div>
+
 @endsection
+@section('scripts')
+    <script>
+        $(document).ready(function() {
+            // Javascript method's body can be found in assets/js/demos.js
+            demo.initDashboardPageCharts();
+
+        });
+    </script>
+@stop

@@ -13,21 +13,36 @@
     <div class="sidebar-wrapper" id="sidebar-wrapper">
         <ul class="nav">
             <li class="active ">
-                <a href="./dashboard.html">
+                <a href="/admin">
                     <i class="now-ui-icons design_app"></i>
                     <p>Dashboard</p>
                 </a>
             </li>
+
             <li>
-                <a href="./icons.html">
-                    <i class="now-ui-icons education_atom"></i>
-                    <p>Icons</p>
-                </a>
+                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
+                        <i class="now-ui-icons design_app"></i>
+                        <p>Products</p>
+                    </a>
+
+                    <div class="collapse" id="collapseExample">
+                        <ul class="nav">
+                            <li>
+                                <a href="{{route('products.create')}}">
+                                    <i class="now-ui-icons education_atom"></i>
+                                    <p>Add product</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
             </li>
+
+
+
             <li>
-                <a href="./map.html">
+                <a href="{{route('categories.index')}}">
                     <i class="now-ui-icons location_map-big"></i>
-                    <p>Maps</p>
+                    <p>Categories</p>
                 </a>
             </li>
             <li>

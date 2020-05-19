@@ -21,4 +21,11 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
+//Remember to add middleware for the admin section
+
+//start of admin section
 Route::get('/admin','AdminHomeController@index');
+
+Route::resource('admin/products','AdminProductsController');
+
+Route::resource('admin/categories', 'AdminCategoriesController');

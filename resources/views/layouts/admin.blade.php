@@ -24,16 +24,18 @@
 
 <body class="">
 <div class="wrapper ">
+    @include('includes.admin_sidebar')
+    <div class="main-panel" id="main-panel">
+        @include('includes.admin_navbar')
 
-@include('includes.admin_sidebar')
-@include('includes.admin_navbar')
- @yield('content')
-@include('includes.admin_footer')
+                   @yield('content')
 
+       @include('includes.admin_footer')
+    </div>
 </div>
 
 @include('includes.admin_scripts')
-
+@yield('scripts')
 </body>
 
 </html>
