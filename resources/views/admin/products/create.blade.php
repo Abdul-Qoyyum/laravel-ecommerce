@@ -11,30 +11,36 @@
                     <h5 class="title">Add Product</h5>
                 </div>
                 <div class="card-body">
-                    <form>
+                    {!! Form::open(['route'=>'products.create','files'=>true]) !!}
                         <div class="row">
                             <div class="col-md-8 pr-1 pl-1">
                                 <div class="form-group">
-                                    <label>Name</label>
-                                    <input type="text" name="name" class="form-control" placeholder="name" value="">
+                                    {!! Form::label('name','Name') !!}
+                                    {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'name']) !!}
                                 </div>
                             </div>
                             <div class="col-md-8 pl-1 pr-1">
                                 <div class="form-group">
-                                    <label>Price</label>
-                                    <input type="text" name="price" class="form-control" placeholder="price" value="">
+                                    {!! Form::label('price','Price') !!}
+                                    {!! Form::text('price',null,['class'=>'form-control','placeholder'=>'price']) !!}
+                                </div>
+                            </div>
+                            <div class="col-md-8 pl-1 pr-1">
+                                <div class="form-group">
+                                    {!! Form::label('thumbnail','Thumbnail') !!}
+                                    {!! Form::file('thumbnail',null,['class'=>'form-control','placeholder'=>'thumbnail']) !!}
                                 </div>
                             </div>
                         </div>
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="form-group">
-                                    <label>Description :</label>
-                                    <textarea rows="4" cols="80" class="form-control" name="description" placeholder="Here can be your description" value=""></textarea>
+                                    {!! Form::label('description','Description') !!}
+                                    {!! Form::textarea('description',null,['class'=>'form-control','placeholder'=>'Here can be your description']) !!}
                                 </div>
                             </div>
                         </div>
-                    </form>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </div>

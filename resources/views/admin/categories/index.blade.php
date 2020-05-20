@@ -11,7 +11,7 @@
                         <h5 class="title">Create Category</h5>
                     </div>
                     <div class="card-body">
-                            {!! Form::open(['route'=>'categories.store']) !!}
+                            {!! Form::open(['route'=>'categories.store','id'=>'categoryForm']) !!}
                             <div class="row">
                                 <div class="col-md-8 pr-1">
                                     <div class="form-group">
@@ -79,5 +79,8 @@
         </div>
     </div>
 
-
 @stop
+@section('scripts')
+    <script !src="">
+    </script>
+    @stop
