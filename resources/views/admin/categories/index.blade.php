@@ -15,11 +15,13 @@
                             <div class="row">
                                 <div class="col-md-8 pr-1">
                                     <div class="form-group">
-                                        {!! Form::text('name', null, ['class'=>"form-control",'placeholder'=>"Category Name"]) !!}
+                                        @error('name')
+                                            @php($name = 'is-invalid')
+                                            @php($msg_name = $message)
+                                        @enderror
+                                        {!! Form::text('name', null, ['class'=>"form-control " . ($name ?? ''),'placeholder'=>"Category Name","id"=>"name"]) !!}
+                                        <small class="text-primary">{{$msg_name ?? ''}}</small>
                                     </div>
-                                    @error('name')
-                                      <div class="alert alert-danger">{{$message}}</div>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="row">
@@ -40,7 +42,7 @@
                         <h5 class="title">Categories</h5>
                     </div>
                     <div class="card-body">
-                        @if($categories)
+                        @if(count($categories))
                         <table class="table">
                             <thead>
                             <tr>
@@ -51,11 +53,12 @@
                             </tr>
                             </thead>
                             <tbody>
+                            @php($i = 0)
                           @foreach($categories as $category)
                             <tr>
-                                <td class="text-center">1</td>
-                                <td>{{$category->name}}</td>
-                                <td>{{$category->created_at->now()->diffForHumans()}}</td>
+                                <td class="text-center">{{++$i}}</td>
+                                <td class="text-capitalize">{{$category->name}}</td>
+                                <td>{{$category->created_at->diffForHumans()}}</td>
                                 <td class="td-actions row">
                                     {!! Form::open(['route'=>['categories.edit',$category->id],'method'=>'get']) !!}
                                       {!! Form::button('<i class="now-ui-icons ui-2_settings-90"></i>',['type' => 'submit','class'=>'ml-1 btn btn-success mb-2 col-xs-6','rel'=>'tooltip']) !!}
@@ -69,8 +72,6 @@
                               @endforeach
                             </tbody>
                         </table>
-                        @else
-                            <p class="card-text">You currently have no categorie(s)</p>
                             @endif
                     </div>
                     <hr>
@@ -81,6 +82,24 @@
 
 @stop
 @section('scripts')
-    <script !src="">
+    <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+    <script>
+        $(document).ready(function(){
+            $("#categoryForm").validate({
+                rules : {
+                    name: {
+                        required: true,
+                        minlength: 2
+                    }
+                },
+                    messages : {
+                        name : {
+                            required : "Please specify the category name",
+                            minlength : "Enter at least two characters"
+                        }
+                    }
+
+          })
+        })
     </script>
     @stop

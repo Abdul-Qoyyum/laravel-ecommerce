@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Http\Requests\CreateProductRequest;
+
 use App\Product;
 
 class AdminProductsController extends Controller
@@ -35,9 +37,10 @@ class AdminProductsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProductRequest $request)
     {
         //
+        return $request->all();
     }
 
     /**
@@ -69,7 +72,7 @@ class AdminProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(CreateProductRequest $request, $id)
     {
         //
     }
