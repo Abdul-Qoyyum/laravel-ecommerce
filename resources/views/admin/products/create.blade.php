@@ -37,6 +37,17 @@
                             </div>
                             <div class="col-md-8 pl-1 pr-1">
                                 <div class="form-group">
+                                    @error('category_id')
+                                        @php($category_id = 'is-invalid')
+                                        @php($msg_category_id = $message)
+                                    @enderror
+                                    {!! Form::label('category_id','Category') !!}
+                                    {!! Form::select('category_id', $select, null, ['class'=>'form-control text-capitalize ' . ($category_id ?? ''),'placeholder'=>'Select Category', 'id'=>'category_id']) !!}
+                                    <small class="text-primary">{{$msg_category_id ?? ''}}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-8 pl-1 pr-1">
+                                <div class="form-group">
                                     @error('thumbnail')
                                         @php($thumbnail = 'is-invalid')
                                         @php($msg_thumbnail = $message)
@@ -55,7 +66,7 @@
                                         @php($msg_description = $message)
                                     @enderror
                                     {!! Form::label('description','Description') !!}
-                                    {!! Form::textarea('description',null,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Here can be your description']) !!}
+                                    {!! Form::textarea('description',null,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Here can be your description about the product']) !!}
                                     <small class="text-primary">{{$msg_description ?? ''}}</small>
                                 </div>
                             </div>
@@ -90,6 +101,9 @@
                         thumbnail : {
                             required : true
                         },
+                        category_id : {
+                            required : true
+                        },
                         description : {
                             required : true,
                             minlength : 5
@@ -102,6 +116,9 @@
                         },
                         price: {
                             required: "Enter the price"
+                        },
+                        category_id: {
+                            required : "Please select a category"
                         },
                         description : {
                             required : "Enter the description"

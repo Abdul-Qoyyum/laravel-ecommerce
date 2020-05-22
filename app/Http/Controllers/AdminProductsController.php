@@ -8,6 +8,8 @@ use App\Http\Requests\CreateProductRequest;
 
 use App\Product;
 
+use App\Category;
+
 class AdminProductsController extends Controller
 {
     /**
@@ -18,6 +20,7 @@ class AdminProductsController extends Controller
     public function index()
     {
         //
+        return "Welcome to the product index page";
     }
 
     /**
@@ -28,7 +31,12 @@ class AdminProductsController extends Controller
     public function create()
     {
         //
-        return view('admin.products.create');
+        $categories = Category::all();
+        $select = [];
+        foreach ($categories as $category){
+            $select[$category->id] = $category->name;
+        }
+        return view('admin.products.create', compact('select'));
     }
 
     /**
@@ -40,7 +48,13 @@ class AdminProductsController extends Controller
     public function store(CreateProductRequest $request)
     {
         //
-        return $request->all();
+        $input = $request->all();
+        $file = $request->file('thumbnail');
+        $name = $file->getClientOriginalName();
+        $file->move(base_path() .'/public/img/products',$name);
+        $input['thumbnail'] = '/img/products/' . $name;
+        Product::create($input);
+        return redirect('admin/products');
     }
 
     /**
