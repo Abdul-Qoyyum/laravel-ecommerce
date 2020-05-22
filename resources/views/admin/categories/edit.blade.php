@@ -11,15 +11,17 @@
                         <h5 class="title">Edit Category</h5>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($category,['route'=>['categories.update',$category->id],'method'=>'patch']) !!}
+                        {!! Form::model($category,['route'=>['categories.update',$category->id],'method'=>'patch','id'=>'categoryForm']) !!}
                         <div class="row">
                             <div class="col-md-8 pr-1">
-                                <div class="form-group">
-                                    {!! Form::text('name', null, ['class'=>"form-control",'placeholder'=>"Category Name"]) !!}
-                                </div>
                                 @error('name')
-                                <div class="alert alert-danger">{{$message}}</div>
+                                    @php($name = 'is-invalid')
+                                    @php($msg_name = $message)
                                 @enderror
+                                <div class="form-group">
+                                    {!! Form::text('name', null, ['class'=>"form-control " . ($name ?? ''),'placeholder'=>"Category Name",'required'=>true]) !!}
+                                </div>
+                                <small class="text-primary">{{$msg_name ?? ''}}</small>
                             </div>
                         </div>
                         <div class="row">
@@ -37,3 +39,6 @@
     </div>
 
     @stop
+@section('scripts')
+    @include('includes.admin_categories_scripts')
+@stop

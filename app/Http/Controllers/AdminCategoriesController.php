@@ -18,7 +18,7 @@ class AdminCategoriesController extends Controller
     public function index()
     {
         //
-        $categories =  Category::all();
+        $categories =  Category::paginate(5);
 
         return view('admin.categories.index', compact('categories'));
     }
@@ -42,7 +42,7 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(['name'=>'required','unique:categories,name']);
+        $request->validate(['name'=>['required','unique:categories','min:2']]);
         $request->name = Str::lower($request->name);
         Category::create(['name'=> $request->name]);
 
@@ -83,6 +83,7 @@ class AdminCategoriesController extends Controller
     public function update(Request $request, $id)
     {
         //
+         $request->validate(['name'=>['required','unique:categories','min:2']]);
          $category = Category::findOrfail($id);
          $category->name = Str::lower($request->name);
          $category->save();
