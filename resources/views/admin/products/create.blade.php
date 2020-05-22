@@ -11,7 +11,7 @@
                     <h5 class="title">Add Product</h5>
                 </div>
                 <div class="card-body">
-                    {!! Form::open(['route'=>'products.store','files'=>true]) !!}
+                    {!! Form::open(['route'=>'products.store','files'=>true,'id'=>'createProductForm']) !!}
                         <div class="row">
                             <div class="col-md-8 pr-1 pl-1">
                                 <div class="form-group">
@@ -72,4 +72,42 @@
             </div>
         </div>
     </div>
+    @stop
+@section('scripts')
+        <script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+        <script>
+            $(document).ready(function(){
+                $('#createProductForm').validate({
+                    rules : {
+                        name : {
+                            required : true,
+                            minlength : 2
+                        },
+                        price : {
+                            required : true,
+                            number : true
+                        },
+                        thumbnail : {
+                            required : true
+                        },
+                        description : {
+                            required : true,
+                            minlength : 5
+                        }
+                    },
+                    messages : {
+                        name: {
+                            required: "Enter the product name",
+                            minlength: "Enter at least two characters"
+                        },
+                        price: {
+                            required: "Enter the price"
+                        },
+                        description : {
+                            required : "Enter the description"
+                        }
+                    }
+                })
+            })
+        </script>
     @stop

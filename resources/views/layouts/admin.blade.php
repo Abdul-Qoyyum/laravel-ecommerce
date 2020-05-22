@@ -18,8 +18,8 @@
     <link href="{{asset('assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
-
-    <link rel="stylesheet" href="{{asset('css/main.css')}}" rel="stylesheet">
+    <!-- Main Css -->
+    <link rel="stylesheet" href="{{asset('css/main.css')}}" />
 </head>
 
 <body class="">
