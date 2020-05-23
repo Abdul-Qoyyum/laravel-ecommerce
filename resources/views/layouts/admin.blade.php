@@ -35,6 +35,7 @@
 </div>
 
 @include('includes.admin_scripts')
+<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
 @yield('scripts')
 </body>
 

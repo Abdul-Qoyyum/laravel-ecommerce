@@ -53,10 +53,9 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @php($i = 0)
-                          @foreach($categories as $category)
+                          @foreach($categories as $key => $category)
                             <tr>
-                                <td class="text-center">{{++$i}}</td>
+                                <td class="text-center">{{++$key}}</td>
                                 <td class="text-capitalize">{{$category->name}}</td>
                                 <td>{{$category->created_at->diffForHumans()}}</td>
                                 <td class="td-actions row">

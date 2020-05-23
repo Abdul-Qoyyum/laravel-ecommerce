@@ -3,25 +3,25 @@
 @section('content')
     <div class="panel-header panel-header-sm">
     </div>
-<div class="content">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">
-                    <h5 class="title">Add Product</h5>
-                </div>
-                <div class="card-body">
-                    {!! Form::open(['route'=>'products.store','files'=>true,'id'=>'createProductForm']) !!}
+    <div class="content">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header">
+                        <h5 class="title">Update Product</h5>
+                    </div>
+                    <div class="card-body">
+                        {!! Form::model($product,['route'=>['products.update',$product->id], 'files'=>true,'id'=>'createProductForm','method'=>'PATCH']) !!}
                         <div class="row">
                             <div class="col-md-8 pr-1 pl-1">
                                 <div class="form-group">
                                     @error('name')
-                                       @php($name = 'is-invalid')
-                                       @php($msg_name  = $message)
+                                        @php($name = 'is-invalid')
+                                        @php($msg_name  = $message)
                                     @enderror
                                     {!! Form::label('name','Name') !!}
                                     {!! Form::text('name',null,['class'=>'form-control ' . ($name ?? '') ,'placeholder'=>'name']) !!}
-                                        <small class="text-primary">{{$msg_name ?? ''}}</small>
+                                    <small class="text-primary">{{$msg_name ?? ''}}</small>
                                 </div>
                             </div>
                             <div class="col-md-8 pl-1 pr-1">
@@ -66,24 +66,24 @@
                                         @php($msg_description = $message)
                                     @enderror
                                     {!! Form::label('description','Description') !!}
-                                    {!! Form::textarea('description',null,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Describe the product']) !!}
+                                    {!! Form::textarea('description',null,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Here can be your description about the product']) !!}
                                     <small class="text-primary">{{$msg_description ?? ''}}</small>
                                 </div>
                             </div>
                         </div>
-                    <div class="row">
-                        <div class="col-md-8 pl-1 pr-1">
-                            <div class="form-group">
-                                {!! Form::submit('Create',['class'=>'btn btn-primary btn-round ml-1']) !!}
+                        <div class="row">
+                            <div class="col-md-8 pl-1 pr-1">
+                                <div class="form-group">
+                                    {!! Form::submit('Submit',['class'=>'btn btn-primary btn-round ml-1']) !!}
+                                </div>
                             </div>
                         </div>
+                        {!! Form::close() !!}
                     </div>
-                    {!! Form::close() !!}
                 </div>
             </div>
         </div>
-    </div>
-    @stop
-@section('scripts')
-    @include('includes.create_products_scripts')
-    @stop
+        @stop
+        @section('scripts')
+            @include('includes.edit_products_scripts')
+        @stop

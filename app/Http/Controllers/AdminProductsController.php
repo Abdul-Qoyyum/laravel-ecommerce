@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+//use Illuminate\Http\Request;
 
 use App\Http\Requests\CreateProductRequest;
+
+use App\Http\Requests\UpdateProductRequest;
 
 use App\Product;
 
@@ -12,6 +14,18 @@ use App\Category;
 
 class AdminProductsController extends Controller
 {
+    /*
+     * Full image path with respect to
+     * the root folder
+     */
+    protected $path = '/public/img/products';
+
+    /*
+     * Image directory with respect to the
+     * public folder
+     */
+    protected $directory = '/img/products/';
+
     /**
      * Display a listing of the resource.
      *
@@ -20,7 +34,8 @@ class AdminProductsController extends Controller
     public function index()
     {
         //
-        return "Welcome to the product index page";
+        $products = Product::paginate(5);
+        return view('admin.products.index',compact('products'));
     }
 
     /**
@@ -31,11 +46,7 @@ class AdminProductsController extends Controller
     public function create()
     {
         //
-        $categories = Category::all();
-        $select = [];
-        foreach ($categories as $category){
-            $select[$category->id] = $category->name;
-        }
+        $select = $this->selectCategories();
         return view('admin.products.create', compact('select'));
     }
 
@@ -49,10 +60,8 @@ class AdminProductsController extends Controller
     {
         //
         $input = $request->all();
-        $file = $request->file('thumbnail');
-        $name = $file->getClientOriginalName();
-        $file->move(base_path() .'/public/img/products',$name);
-        $input['thumbnail'] = '/img/products/' . $name;
+        $name = $this->saveProductThumbnail($request->file('thumbnail'));
+        $input['thumbnail'] = $this->directory . $name;
         Product::create($input);
         return redirect('admin/products');
     }
@@ -77,6 +86,9 @@ class AdminProductsController extends Controller
     public function edit($id)
     {
         //
+        $product = Product::findOrFail($id);
+        $select = $this->selectCategories();
+        return view('admin.products.edit',compact('product','select'));
     }
 
     /**
@@ -86,9 +98,19 @@ class AdminProductsController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(CreateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $id)
     {
-        //
+        $input = $request->all();
+        $product = Product::findOrFail($id);
+//        if there is an attempt to change the thumbnail,
+//        remove and replace the current thumbnail
+        if ($file = $request->file('thumbnail')){
+            unlink(base_path() . '/public' . $product->thumbnail);
+            $name = $this->saveProductThumbnail($file);
+            $input['thumbnail'] = $this->directory .  $name;
+        }
+        $product->update($input);
+        return redirect('admin/products');
     }
 
     /**
@@ -100,5 +122,34 @@ class AdminProductsController extends Controller
     public function destroy($id)
     {
         //
+        $product = Product::findOrFail($id);
+        unlink(base_path() .'/public/'. $product->thumbnail);
+        $product->destroy($id);
+        return redirect()->back();
     }
+
+    /**
+     * Organise the categories options
+     * @return array
+     */
+    public function selectCategories(){
+        $categories = Category::all();
+        $select = [];
+        foreach ($categories as $category){
+            $select[$category->id] = $category->name;
+        }
+        return $select;
+    }
+
+    /**
+     * Save the file to the resource
+     * @param $file
+     * @return string
+     */
+    public function saveProductThumbnail($file){
+        $name = time() . $file->getClientOriginalName();
+        $file->move(base_path() . $this->path,$name);
+        return $name;
+    }
+
 }

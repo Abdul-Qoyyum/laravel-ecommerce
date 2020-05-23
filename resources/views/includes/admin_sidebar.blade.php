@@ -18,27 +18,18 @@
                     <p>Dashboard</p>
                 </a>
             </li>
-
             <li>
-                    <a data-toggle="collapse" href="#collapseExample" aria-expanded="false" aria-controls="collapseExample">
-                        <i class="now-ui-icons design_app"></i>
-                        <p>Products</p>
-                    </a>
-
-                    <div class="collapse" id="collapseExample">
-                        <ul class="nav">
-                            <li>
-                                <a href="{{route('products.create')}}">
-                                    <i class="now-ui-icons education_atom"></i>
-                                    <p>Add product</p>
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
+                <a href="{{route('products.index')}}">
+                    <i class="now-ui-icons education_atom"></i>
+                    <p>View products</p>
+                </a>
             </li>
-
-
-
+            <li>
+                <a href="{{route('products.create')}}">
+                    <i class="now-ui-icons education_atom"></i>
+                    <p>Add product</p>
+                </a>
+            </li>
             <li>
                 <a href="{{route('categories.index')}}">
                     <i class="now-ui-icons location_map-big"></i>
