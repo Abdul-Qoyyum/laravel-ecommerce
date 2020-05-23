@@ -8,7 +8,7 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="title">Edit Category</h5>
+                        <h5 class="title">Update Category</h5>
                     </div>
                     <div class="card-body">
                         {!! Form::model($category,['route'=>['categories.update',$category->id],'method'=>'patch','id'=>'categoryForm']) !!}

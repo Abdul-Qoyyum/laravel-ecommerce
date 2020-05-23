@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Category;
 
-use Illuminate\Support\Str;
-
 class AdminCategoriesController extends Controller
 {
     /**
@@ -42,11 +40,9 @@ class AdminCategoriesController extends Controller
     public function store(Request $request)
     {
         //
-        $request->validate(['name'=>['required','unique:categories','min:2']]);
-        $request->name = Str::lower($request->name);
-        Category::create(['name'=> $request->name]);
-
-        return redirect()->back();
+          $request->validate(['name'=>['required','unique:categories','min:2']]);
+          Category::create($request->all());
+          return redirect()->back();
     }
 
     /**
@@ -85,9 +81,8 @@ class AdminCategoriesController extends Controller
         //
          $request->validate(['name'=>['required','unique:categories','min:2']]);
          $category = Category::findOrfail($id);
-         $category->name = Str::lower($request->name);
-         $category->save();
-        return redirect('admin/categories');
+         $category->update($request->all());
+         return redirect('admin/categories');
     }
 
     /**

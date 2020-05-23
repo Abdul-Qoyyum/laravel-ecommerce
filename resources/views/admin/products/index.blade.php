@@ -49,11 +49,10 @@
                                     @endforeach
                                 </tbody>
                             </table>
+                        <div class="row">
+                          {{$products->links('vendor.pagination.simple-default')}}
                         </div>
                     @endif
-
-                    {{--                    </div>--}}
-
                 </div>
             </div>
         </div>

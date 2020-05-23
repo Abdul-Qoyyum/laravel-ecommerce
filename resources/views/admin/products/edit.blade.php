@@ -74,7 +74,7 @@
                         <div class="row">
                             <div class="col-md-8 pl-1 pr-1">
                                 <div class="form-group">
-                                    {!! Form::submit('Submit',['class'=>'btn btn-primary btn-round ml-1']) !!}
+                                    {!! Form::submit('Update',['class'=>'btn btn-primary btn-round ml-1']) !!}
                                 </div>
                             </div>
                         </div>
