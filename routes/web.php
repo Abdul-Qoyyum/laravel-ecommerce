@@ -17,15 +17,19 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Auth::routes();
+Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
 //Remember to add middleware for the admin section
 
 //start of admin section
-Route::get('/admin','AdminHomeController@index');
+Route::middleware(['auth','verified'])->prefix('admin')->group(function(){
 
-Route::resource('admin/products','AdminProductsController');
+    Route::get('/','AdminHomeController@index');
 
-Route::resource('admin/categories', 'AdminCategoriesController');
+    Route::resource('products','AdminProductsController');
+
+    Route::resource('categories', 'AdminCategoriesController');
+
+});
