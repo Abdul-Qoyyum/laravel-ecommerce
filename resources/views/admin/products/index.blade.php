@@ -28,7 +28,7 @@
                                 @foreach($products as $key => $product)
                                 <tr>
                                     <td class="text-center">{{++$key}}</td>
-                                    <td style="height:150px; width:100px"><img class="h-100 w-100 rounded img-thumbnail" src="{{url($product->thumbnail)}}" alt="Product's Image"></td>
+                                    <td style="height:150px; width:100px"><img class="h-100 w-100 rounded img-thumbnail" src="{{url($product->image->url)}}" alt="Product's Image"></td>
                                     <td>{{$product->name}}</td>
                                     <td>&#8358 {{$product->price}}</td>
                                     <td class="text-right text-capitalize">{{$product->category->name}}</td>

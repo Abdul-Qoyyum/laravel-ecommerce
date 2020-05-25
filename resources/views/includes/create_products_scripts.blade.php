@@ -10,7 +10,7 @@
                     required : true,
                     number : true
                 },
-                thumbnail : {
+                url : {
                     required : true
                 },
                 category_id : {

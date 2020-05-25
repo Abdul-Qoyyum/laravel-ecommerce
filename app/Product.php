@@ -18,4 +18,12 @@ class Product extends Model
         return $this->belongsTo('App\Category');
     }
 
+    /**
+     * One to one polymorphic relationhip with image
+     * @return \Illuminate\Database\Eloquent\Relations\MorphOne
+     */
+    public function image(){
+        return $this->morphOne('App\Image','imageable');
+    }
+
 }

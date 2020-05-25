@@ -48,13 +48,13 @@
                             </div>
                             <div class="col-md-8 pl-1 pr-1">
                                 <div class="form-group">
-                                    @error('thumbnail')
+                                    @error('url')
                                         @php($thumbnail = 'is-invalid')
-                                        @php($msg_thumbnail = $message)
+                                        @php($msg_url = $message)
                                     @enderror
-                                    {!! Form::label('thumbnail','Thumbnail') !!}
-                                    {!! Form::file('thumbnail',null,['class'=>'form-control ' . ($thumbnail ?? ''),'placeholder'=>'thumbnail']) !!}
-                                    <small class="text-primary">{{$msg_thumbnail ?? ''}}</small>
+                                    {!! Form::label('url','Image') !!}
+                                    {!! Form::file('url',null,['class'=>'form-control ' . ($thumbnail ?? ''),'placeholder'=>'Image']) !!}
+                                    <small class="text-primary">{{$msg_url ?? ''}}</small>
                                 </div>
                             </div>
                         </div>

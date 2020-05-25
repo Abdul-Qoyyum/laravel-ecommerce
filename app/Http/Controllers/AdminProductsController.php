@@ -60,9 +60,9 @@ class AdminProductsController extends Controller
     {
         //
         $input = $request->all();
-        $name = $this->saveProductThumbnail($request->file('thumbnail'));
-        $input['thumbnail'] = $this->directory . $name;
-        Product::create($input);
+        $name = $this->directory . $this->saveProductImage($request->file('url'));
+        $product = Product::create($input);
+        $product->image()->create(['url'=>$name]);
         return redirect('admin/products');
     }
 
@@ -102,12 +102,12 @@ class AdminProductsController extends Controller
     {
         $input = $request->all();
         $product = Product::findOrFail($id);
-//        if there is an attempt to change the thumbnail,
-//        remove and replace the current thumbnail
-        if ($file = $request->file('thumbnail')){
-            unlink(base_path() . '/public' . $product->thumbnail);
-            $name = $this->saveProductThumbnail($file);
-            $input['thumbnail'] = $this->directory .  $name;
+//        if there is an attempt to change the Image,
+//        remove and replace the current Image
+        if ($file = $request->file('url')){
+            unlink(base_path() . '/public' . $product->image->url);
+            $name = $this->directory . $this->saveProductImage($file);
+            $product->image()->update(['url'=>$name]);
         }
         $product->update($input);
         return redirect('admin/products');
@@ -123,7 +123,7 @@ class AdminProductsController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        unlink(base_path() .'/public/'. $product->thumbnail);
+        unlink(base_path() .'/public/'. $product->image->url);
         $product->destroy($id);
         return redirect()->back();
     }
@@ -146,7 +146,7 @@ class AdminProductsController extends Controller
      * @param $file
      * @return string
      */
-    public function saveProductThumbnail($file){
+    public function saveProductImage($file){
         $name = time() . $file->getClientOriginalName();
         $file->move(base_path() . $this->path,$name);
         return $name;

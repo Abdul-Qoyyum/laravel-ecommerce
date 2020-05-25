@@ -15,6 +15,7 @@ class CheckRole
      */
     public function handle($request, Closure $next)
     {
+        //Only grant staffs passage to the admin dashboard
         if ($request->user()->role_id != 3){
             return $next($request);
         }

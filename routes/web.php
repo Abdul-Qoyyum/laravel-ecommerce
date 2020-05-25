@@ -21,10 +21,12 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Admin routes
+//Admin route
 Route::middleware(['auth','verified','staff'])->prefix('admin')->group(function(){
 
     Route::get('/','AdminHomeController@index');
+
+    Route::resource('profile','AdminProfileController');
 
     Route::resource('products','AdminProductsController');
 

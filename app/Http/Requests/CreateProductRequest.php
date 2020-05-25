@@ -28,7 +28,7 @@ class CreateProductRequest extends FormRequest
             //
             'name'=>'required|min:2',
             'price'=>'required|regex:/^\d+(\.\d{1,2})?$/',
-            'thumbnail'=>'required',
+            'url'=>'required',
             'description'=>'required|min:5'
         ];
     }
