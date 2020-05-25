@@ -52,7 +52,7 @@
                                         @php($url = 'is-invalid')
                                         @php($msg_url = $message)
                                     @enderror
-                                    {!! Form::label('url','Image') !!}
+                                    {!! Form::label('url','Select Image',['class'=>'btn btn-secondary btn-round',"style"=>"color:white"]) !!}
                                     {!! Form::file('url',null,['class'=>'form-control ' . ($url ?? ''),'placeholder'=>'Image']) !!}
                                     <small class="text-primary">{{$msg_url ?? ''}}</small>
                                 </div>

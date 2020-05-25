@@ -44,4 +44,12 @@ class User extends Authenticatable implements MustVerifyEmail
     public function image(){
         return $this->morphOne('App\Image','imageable');
     }
+
+    /**
+     * Eloquent One-to-one relationship with role resource
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function role(){
+        return $this->belongsTo('App\Role');
+    }
 }
