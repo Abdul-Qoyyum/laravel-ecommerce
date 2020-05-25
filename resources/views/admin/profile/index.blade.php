@@ -13,19 +13,23 @@
                         <h5 class="title">Edit Profile</h5>
                     </div>
                     <div class="card-body">
-{{--                        <form>--}}
-                        {!! Form::model($user,['route'=>['profile.update',$user->id],'method'=>'PATCH']) !!}
+                        {!! Form::model($user,['route'=>['profile.update',$user->id],'method'=>'PATCH','files'=>true]) !!}
                             <div class="row">
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
+                                        @php($name_error = '')
+                                        @error('name')
+                                        @php($name_error = $message)
+                                        @enderror
                                         {!! Form::label('name','Name') !!}
-                                        {!! Form::text('name',null,['class'=>'form-control','placeholder'=>'name']) !!}
+                                        {!! Form::text('name',null,['class'=>'form-control ' . ($name_error ? 'is-invalid' : ''),'placeholder'=>'name']) !!}
+                                        <small class="error">{{$name_error}}</small>
                                     </div>
                                 </div>
                                 <div class="col-md-6 pr-1">
                                     <div class="form-group">
                                         {!! Form::label('email','Email') !!}
-                                        {!! Form::text('email',null,['class'=>'form-control','placeholder'=>'name','disabled'=>'true']) !!}
+                                        {!! Form::text('email',null,['class'=>'form-control','placeholder'=>'email','disabled'=>'true']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -52,7 +56,6 @@
                            </div>
 
                         {!! Form::close() !!}
-{{--                        </form>--}}
 
                     </div>
                 </div>
@@ -65,7 +68,7 @@
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="../assets/img/mike.jpg" alt="...">
+                                <img class="avatar border-gray" src="{{ $user->image->url ?? '../assets/img/default-avatar.png'}}" alt="...">
                                 <h5 class="title">{{$user->name}}</h5>
                             </a>
                             <p class="description">

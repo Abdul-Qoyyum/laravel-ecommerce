@@ -105,9 +105,11 @@ class AdminProductsController extends Controller
 //        if there is an attempt to change the Image,
 //        remove and replace the current Image
         if ($file = $request->file('url')){
-            unlink(base_path() . '/public' . $product->image->url);
-            $name = $this->directory . $this->saveProductImage($file);
-            $product->image()->update(['url'=>$name]);
+            if (isset($product->image->url) && file_exists(base_path() . '/public' . $product->image->url)){
+                unlink(base_path() . '/public' . $product->image->url);
+                $name = $this->directory . $this->saveProductImage($file);
+                $product->image()->updateOrCreate(['imageable_id'=>$product->id],['url'=>$name]);
+            }
         }
         $product->update($input);
         return redirect('admin/products');
