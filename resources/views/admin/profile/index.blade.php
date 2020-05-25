@@ -10,7 +10,7 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-header">
-                        <h5 class="title">Edit Profile</h5>
+                        <h5 class="title">Update Profile</h5>
                     </div>
                     <div class="card-body">
                         {!! Form::model($user,['route'=>['profile.update',$user->id],'method'=>'PATCH','files'=>true]) !!}
@@ -24,12 +24,6 @@
                                         {!! Form::label('name','Name') !!}
                                         {!! Form::text('name',null,['class'=>'form-control ' . ($name_error ? 'is-invalid' : ''),'placeholder'=>'name']) !!}
                                         <small class="error">{{$name_error}}</small>
-                                    </div>
-                                </div>
-                                <div class="col-md-6 pr-1">
-                                    <div class="form-group">
-                                        {!! Form::label('email','Email') !!}
-                                        {!! Form::text('email',null,['class'=>'form-control','placeholder'=>'email','disabled'=>'true']) !!}
                                     </div>
                                 </div>
                             </div>
@@ -63,36 +57,20 @@
             <div class="col-md-4">
                 <div class="card card-user">
                     <div class="image">
-                        <img src="../assets/img/bg5.jpg" alt="...">
+                        <img src="/assets/img/bg5.jpg" alt="...">
                     </div>
                     <div class="card-body">
                         <div class="author">
                             <a href="#">
-                                <img class="avatar border-gray" src="{{ $user->image->url ?? '../assets/img/default-avatar.png'}}" alt="...">
+                                <img class="avatar border-gray" src="{{ $user->image->url ?? '/assets/img/default-avatar.png'}}" alt="...">
                                 <h5 class="title">{{$user->name}}</h5>
                             </a>
                             <p class="description">
                                 <strong>Role:</strong> {{$user->role->name}}
                             </p>
                         </div>
-                        <p class="description text-center">
-                            "Lamborghini Mercy <br>
-                            Your chick she so thirsty <br>
-                            I'm in that two seat Lambo"
-                        </p>
                     </div>
                     <hr>
-                    <div class="button-container">
-                        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                            <i class="fab fa-facebook-f"></i>
-                        </button>
-                        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                            <i class="fab fa-twitter"></i>
-                        </button>
-                        <button href="#" class="btn btn-neutral btn-icon btn-round btn-lg">
-                            <i class="fab fa-google-plus-g"></i>
-                        </button>
-                    </div>
                 </div>
             </div>
         </div>

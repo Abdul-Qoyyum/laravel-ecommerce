@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use Illuminate\Support\Facades\Auth;
 
-use App\Http\Requests\EditProfileRequest;
-
 use Illuminate\Support\Facades\Hash;
 
 use App\User;
@@ -89,7 +87,7 @@ class AdminProfileController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(EditProfileRequest $request, $id)
+    public function update(Request $request, $id)
     {
         //Hash::make($data['password'])
         $user = User::findOrFail($id);
