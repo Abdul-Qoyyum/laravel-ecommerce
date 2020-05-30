@@ -13,11 +13,16 @@
     <!--     Fonts and icons     -->
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
+
     <!-- CSS Files -->
     <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
+    <link rel="stylesheet" href="{{asset('assets/css/now-ui-kit.min.css?v=1.0.1')}}" />
     <link href="{{asset('assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
+
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
+
     <!-- Main Css -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}" />
 </head>
@@ -25,7 +30,7 @@
 <body class="">
 {{--Navbar section--}}
 <nav class="navbar navbar-expand-lg bg-primary">
-    <div class="container">
+    <div class="container-fluid">
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar bar1"></span>
             <span class="navbar-toggler-bar bar2"></span>
@@ -61,6 +66,7 @@
                         </li>
                     @endif
                 @else
+
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                             {{ Auth::user()->name }}
@@ -78,9 +84,14 @@
                         </div>
                     </li>
                 @endguest
+
             </ul>
                 </div>
             </div>
+            <div class="nav-item">
+                <i class="nav-link now-ui-icons shopping_cart-simple" style="font-size: 25px;color:white;"></i>
+            </div>
+
         </div>
     </div>
 </nav>
@@ -91,9 +102,150 @@
         @yield('content')
 
 
-@include('includes.admin_scripts')
-<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>
+{{-- footer section --}}
+<footer class="footer " data-background-color="black">
+    <div class="container">
+        <div class="content">
+            <div class="row">
+                <div class="col-md-3">
+                    <h5>Customer Services</h5>
+                    <ul class="links-vertical">
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Help Center
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Money refund
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Terms and Policy
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Open dispute
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>My Account</h5>
+                    <ul class="links-vertical">
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                User Login
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                User Register
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Account Setting
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                My Orders
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                My Wishlist
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>About</h5>
+                    <ul class="links-vertical">
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Our History
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                How to buy
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Delivery and payment
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Advertise
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo" class="text-muted">
+                                Partnership
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-3">
+                    <h5>Contacts</h5>
+                    <ul class="links-vertical">
+                        <li class="w-100">
+                            <a href="#pablo">
+                                Phone : +123456789
+                            </a>
+                        </li>
+                        <li class="w-100">
+                            <a href="#pablo">
+                                Fax : +1234567890
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="social-buttons">
+                        <li>
+                            <a href="#pablo" class="btn btn-icon btn-neutral btn-twitter btn-round">
+                                <i class="fa fa-twitter"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pablo" class="btn btn-icon btn-neutral btn-facebook btn-round">
+                                <i class="fa fa-facebook-square"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pablo" class="btn btn-icon btn-neutral btn-google btn-round">
+                                <i class="fa fa-google-plus"></i>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="#pablo" class="btn btn-icon btn-neutral btn-instagram btn-round">
+                                <i class="fas fa-instagram"></i>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <hr />
+        <div class="copyright">
+            Copyright &copy;
+            <script>
+                document.write(new Date().getFullYear())
+            </script> Techwise All Rights Reserved.
+        </div>
+    </div>
+</footer>
+{{-- End footer section --}}
+{{--<script src="https://cdn.jsdelivr.net/jquery.validation/1.16.0/jquery.validate.min.js"></script>--}}
+@include('includes/scripts')
 @yield('scripts')
+
+
 </body>
 
 </html>

@@ -21,7 +21,14 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//Admin route
+//cart routes
+Route::middleware(['auth','verified'])->group(function (){
+
+    Route::resource('cart','CartController');
+
+});
+
+//Admin routes
 Route::middleware(['auth','verified','staff'])->prefix('admin')->group(function(){
 
     Route::get('/','AdminHomeController@index');
