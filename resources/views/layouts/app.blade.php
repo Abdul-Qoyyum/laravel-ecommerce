@@ -14,15 +14,11 @@
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css" />
-
-    <!-- CSS Files -->
-    <link href="{{asset('assets/css/bootstrap.min.css')}}" rel="stylesheet" />
-    <link rel="stylesheet" href="{{asset('assets/css/now-ui-kit.min.css?v=1.0.1')}}" />
-    <link href="{{asset('assets/css/now-ui-dashboard.css?v=1.5.0')}}" rel="stylesheet" />
-
-    <!-- CSS Just for demo purpose, don't include it in your project -->
-    <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
-
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
+    <!-- Bootstrap -->
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <!-- Main Css -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}" />
 </head>
@@ -36,9 +32,6 @@
             <span class="navbar-toggler-bar bar2"></span>
             <span class="navbar-toggler-bar bar3"></span>
         </button>
-{{--        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">--}}
-{{--            <span class="navbar-toggler-icon"></span>--}}
-{{--        </button>--}}
         <a class="navbar-brand" href="#">Ecommerce</a>
 
         <div class="collapse navbar-collapse ml-5" id="navbarSupportedContent">
@@ -98,9 +91,7 @@
 
 
 {{--End navbar section--}}
-
         @yield('content')
-
 
 {{-- footer section --}}
 <footer class="footer " data-background-color="black">

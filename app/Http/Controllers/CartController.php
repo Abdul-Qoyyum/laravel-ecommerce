@@ -50,7 +50,8 @@ class CartController extends Controller
     public function show($id)
     {
         //
-        return "Received command $id";
+         $product = Product::findOrFail($id);
+         return view('cart.show',compact('product'));
     }
 
     /**

@@ -10,7 +10,10 @@
                     required : true,
                     number : true
                 },
-                url : {
+                first_url : {
+                    required : true
+                },
+                second_url : {
                     required : true
                 },
                 category_id : {

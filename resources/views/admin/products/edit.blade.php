@@ -48,13 +48,24 @@
                             </div>
                             <div class="col-md-8 pl-1 pr-1">
                                 <div class="form-group">
-                                    @error('url')
-                                        @php($thumbnail = 'is-invalid')
-                                        @php($msg_url = $message)
+                                    @error('first_url')
+                                    @php($first_url = 'is-invalid')
+                                    @php($msg_first_url = $message)
                                     @enderror
-                                    {!! Form::label('url','Image') !!}
-                                    {!! Form::file('url',null,['class'=>'form-control ' . ($thumbnail ?? ''),'placeholder'=>'Image']) !!}
-                                    <small class="text-primary">{{$msg_url ?? ''}}</small>
+                                    {!! Form::label('first_url','First Image',['class'=>'btn btn-secondary btn-round',"style"=>"color:white"]) !!}
+                                    {!! Form::file('first_url',null,['class'=>'form-control ' . ($first_url ?? ''),'placeholder'=>'Image']) !!}
+                                    <small class="text-primary">{{$msg_first_url ?? ''}}</small>
+                                </div>
+                            </div>
+                            <div class="col-md-8 pl-1 pr-1">
+                                <div class="form-group">
+                                    @error('second_url')
+                                    @php($first_url = 'is-invalid')
+                                    @php($msg_second_url = $message)
+                                    @enderror
+                                    {!! Form::label('second_url','Second Image',['class'=>'btn btn-secondary btn-round',"style"=>"color:white"]) !!}
+                                    {!! Form::file('second_url',null,['class'=>'form-control ' . ($first_url ?? ''),'placeholder'=>'Image']) !!}
+                                    <small class="text-primary">{{$msg_second_url ?? ''}}</small>
                                 </div>
                             </div>
                         </div>
@@ -66,7 +77,7 @@
                                         @php($msg_description = $message)
                                     @enderror
                                     {!! Form::label('description','Description') !!}
-                                    {!! Form::textarea('description',null,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Here can be your description about the product']) !!}
+                                    {!! Form::textarea('description',$product->photo->description,['class'=>'form-control ' . ($description ?? ''),'placeholder'=>'Here can be your description about the product']) !!}
                                     <small class="text-primary">{{$msg_description ?? ''}}</small>
                                 </div>
                             </div>

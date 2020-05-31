@@ -60,9 +60,14 @@ class AdminProductsController extends Controller
     {
         //
         $input = $request->all();
-        $name = $this->directory . $this->saveProductImage($request->file('url'));
+        $first_url = $this->directory . $this->saveProductImage($request->file('first_url'));
+        $second_url = $this->directory . $this->saveProductImage($request->file('second_url'));
         $product = Product::create($input);
-        $product->image()->create(['url'=>$name]);
+        $product->photo()->create([
+            'first_url'=>$first_url,
+            'second_url'=>$second_url,
+            'description'=>$input['description']
+        ]);
         return redirect('admin/products');
     }
 
@@ -102,15 +107,18 @@ class AdminProductsController extends Controller
     {
         $input = $request->all();
         $product = Product::findOrFail($id);
-//        if there is an attempt to change the Image,
-//        remove and replace the current Image
-        if ($file = $request->file('url')){
-            if (isset($product->image->url) && file_exists(base_path() . '/public' . $product->image->url)){
-                unlink(base_path() . '/public' . $product->image->url);
-                $name = $this->directory . $this->saveProductImage($file);
-                $product->image()->updateOrCreate(['imageable_id'=>$product->id],['url'=>$name]);
-            }
+
+        if ($request->file('first_url')){
+            $first_url = $this->updateProductImage($request->file('first_url'),$product->photo->first_url);
+            $product->photo->first_url = $first_url;
         }
+
+        if ($request->file('second_url')){
+            $second_url = $this->updateProductImage($request->file('second_url'),$product->photo->second_url);
+            $product->photo->second_url = $second_url;
+        }
+
+        $product->photo->save();
         $product->update($input);
         return redirect('admin/products');
     }
@@ -149,9 +157,17 @@ class AdminProductsController extends Controller
      * @return string
      */
     public function saveProductImage($file){
-        $name = time() . $file->getClientOriginalName();
+        $name = time() . "-" . $file->getClientOriginalName();
         $file->move(base_path() . $this->path,$name);
         return $name;
+    }
+
+
+    public function updateProductImage($file, $formalUrl){
+            if (isset($formalUrl) && file_exists(base_path() . '/public' . $formalUrl)){
+                unlink(base_path() . '/public' . $formalUrl);
+                return $this->directory . $this->saveProductImage($file);
+            }
     }
 
 }
