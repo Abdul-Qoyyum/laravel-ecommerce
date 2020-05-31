@@ -65,8 +65,7 @@ class AdminProductsController extends Controller
         $product = Product::create($input);
         $product->photo()->create([
             'first_url'=>$first_url,
-            'second_url'=>$second_url,
-            'description'=>$input['description']
+            'second_url'=>$second_url
         ]);
         return redirect('admin/products');
     }
@@ -107,18 +106,17 @@ class AdminProductsController extends Controller
     {
         $input = $request->all();
         $product = Product::findOrFail($id);
-
+        //
         if ($request->file('first_url')){
             $first_url = $this->updateProductImage($request->file('first_url'),$product->photo->first_url);
-            $product->photo->first_url = $first_url;
+            $product->photo->update(['first_url'=>$first_url]);
         }
 
         if ($request->file('second_url')){
             $second_url = $this->updateProductImage($request->file('second_url'),$product->photo->second_url);
-            $product->photo->second_url = $second_url;
+            $product->photo->update(['second_url'=>$second_url]);
         }
 
-        $product->photo->save();
         $product->update($input);
         return redirect('admin/products');
     }
