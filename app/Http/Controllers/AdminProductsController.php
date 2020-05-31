@@ -106,7 +106,7 @@ class AdminProductsController extends Controller
     {
         $input = $request->all();
         $product = Product::findOrFail($id);
-        //
+
         if ($request->file('first_url')){
             $first_url = $this->updateProductImage($request->file('first_url'),$product->photo->first_url);
             $product->photo->update(['first_url'=>$first_url]);
@@ -131,7 +131,10 @@ class AdminProductsController extends Controller
     {
         //
         $product = Product::findOrFail($id);
-        unlink(base_path() .'/public/'. $product->image->url);
+        $this->deleteProductImage($product->photo->first_url);
+        $this->deleteProductImage($product->photo->second_url);
+//        unlink(base_path() .'/public/'. $product->photo->first_url);
+//        unlink(base_path() .'/public/'. $product->photo->second_url);
         $product->destroy($id);
         return redirect()->back();
     }
@@ -166,6 +169,12 @@ class AdminProductsController extends Controller
                 unlink(base_path() . '/public' . $formalUrl);
                 return $this->directory . $this->saveProductImage($file);
             }
+    }
+
+    public function deleteProductImage($path){
+        if (isset($path) && file_exists(base_path() . '/public' . $path)){
+            unlink(base_path() . '/public' . $path);
+        }
     }
 
 }
