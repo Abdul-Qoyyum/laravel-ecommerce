@@ -133,8 +133,6 @@ class AdminProductsController extends Controller
         $product = Product::findOrFail($id);
         $this->deleteProductImage($product->photo->first_url);
         $this->deleteProductImage($product->photo->second_url);
-//        unlink(base_path() .'/public/'. $product->photo->first_url);
-//        unlink(base_path() .'/public/'. $product->photo->second_url);
         $product->destroy($id);
         return redirect()->back();
     }

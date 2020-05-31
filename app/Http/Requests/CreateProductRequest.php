@@ -28,8 +28,8 @@ class CreateProductRequest extends FormRequest
             //
             'name'=>'required|min:2',
             'price'=>'required|regex:/^\d+(\.\d{1,2})?$/',
-            'first_url'=>'required',
-            'second_url'=>'required',
+            'first_url'=>'required|mimes:jpeg,bmp,png|max:500',
+            'second_url'=>'required|mimes:jpeg,bmp,png|max:500',
             'description'=>'required|min:5'
         ];
     }
