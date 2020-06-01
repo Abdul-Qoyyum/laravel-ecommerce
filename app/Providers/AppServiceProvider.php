@@ -2,9 +2,12 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Database\Schema\Builder;
+
+use Cart;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -27,5 +30,9 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Builder::defaultStringLength(191);
+        view()->composer('includes.navbar',function ($view){
+            $count = Auth::check() ? Cart::session(Auth::id())->getContent()->count() : 0;
+            $view->with('count', $count);
+        });
     }
 }

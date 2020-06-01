@@ -162,6 +162,12 @@ class AdminProductsController extends Controller
     }
 
 
+    /**
+     * Save the resource file
+     * @param $file
+     * @param $formalUrl
+     * @return string
+     */
     public function updateProductImage($file, $formalUrl){
             if (isset($formalUrl) && file_exists(base_path() . '/public' . $formalUrl)){
                 unlink(base_path() . '/public' . $formalUrl);
@@ -169,6 +175,11 @@ class AdminProductsController extends Controller
             }
     }
 
+
+    /**
+     * Delete the resource file
+     * @param $path
+     */
     public function deleteProductImage($path){
         if (isset($path) && file_exists(base_path() . '/public' . $path)){
             unlink(base_path() . '/public' . $path);

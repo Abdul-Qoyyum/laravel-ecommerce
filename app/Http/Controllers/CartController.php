@@ -4,9 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-use Darryldecode\Cart;
+use Cart;
 
 use App\Product;
+
+use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
@@ -18,6 +20,8 @@ class CartController extends Controller
     public function index()
     {
         //
+        $items = Cart::session(Auth::id())->getContent();
+        return view('cart.index',compact('items'));
     }
 
     /**
@@ -87,4 +91,45 @@ class CartController extends Controller
     {
         //
     }
+
+
+
+    /**
+     * Add products to cart
+     * @param $id
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function add($id){
+       $product = Product::findOrFail($id);
+       $userId = Auth::user()->id;
+
+      //if the item exist, update it. else, add a new one.
+       if ($items = Cart::session($userId)->getContent()){
+
+           foreach ($items as $item => $value){
+               if ($value->id == $product->id){
+                   Cart::session($userId)->update($item,['quantity'=>1]);
+//                   going to change return value to total cart products later when jQuery is implemented.
+                    return redirect()->back();
+               }
+           }
+
+       }
+
+           Cart::session($userId)->add(array(
+               'id' => $product->id,
+               'name' => $product->name,
+               'price' => $product->price,
+               'quantity' => 1,
+               'attributes' => array(),
+               'associatedModel' => $product
+           ));
+
+//        going to change return value to total cart products later when jQuery is implemented.
+          return redirect()->back();
+    }
+
+
+
+
 }

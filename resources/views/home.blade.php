@@ -19,8 +19,7 @@
 {{--            </div>--}}
 {{--        </div>--}}
 {{--    </div>--}}
-    <h3 class="h3">Products</h3>
-    <div class="row">
+    <div class="row" style="padding: 100px 0;">
         @if($products)
             @foreach($products as $product)
         <div class="col-md-3 col-sm-6">
@@ -32,7 +31,9 @@
                     </a>
                     <ul class="social">
                         <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
-                        <li><a href="#"><i class="fa fa-shopping-cart"></i></a></li>
+                        <li>
+                            <a href="{{route('cart.add',$product->id)}}"><i class="fa fa-shopping-cart"></i></a>
+                        </li>
                     </ul>
                     <span class="product-new-label">New</span>
                 </div>
