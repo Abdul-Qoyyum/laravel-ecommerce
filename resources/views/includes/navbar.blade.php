@@ -44,7 +44,7 @@
                     <li class="nav-item">
                         <a class="btn btn-success btn-sm" href="{{route('cart.index')}}">
                             <i class="fa fa-shopping-cart"></i> Cart
-                            <span class="badge badge-light">{{$count}}</span>
+                            <span class="badge badge-light count">{{$count}}</span>
                         </a>
                     </li>
 

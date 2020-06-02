@@ -24,7 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 //cart routes
 Route::middleware(['auth','verified'])->group(function (){
 
-    Route::get('cart/add/{id}','CartController@add')->name('cart.add');
+    Route::get('cart/clear','CartController@clear')->name('cart.clear');
 
     Route::resource('cart','CartController');
 

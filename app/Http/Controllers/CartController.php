@@ -12,6 +12,21 @@ use Illuminate\Support\Facades\Auth;
 
 class CartController extends Controller
 {
+
+    /**
+     * set the current logged in user cart as global
+     * CartController constructor.
+     */
+    public function __construct()
+    {
+        $this->middleware(function ($request, $next) {
+            $this->id = Auth::user()->id;
+            $this->cart = Cart::session($this->id);
+            return $next($request);
+        });
+    }
+
+
     /**
      * Display a listing of the resource.
      *
@@ -20,8 +35,11 @@ class CartController extends Controller
     public function index()
     {
         //
-        $items = Cart::session(Auth::id())->getContent();
-        return view('cart.index',compact('items'));
+        $items = $this->cart->getContent();
+        $total = $this->cart->getTotal();
+        $subtotal = $this->cart->getSubTotal();
+        return view('cart.index',compact('items','total','subtotal'));
+
     }
 
     /**
@@ -43,6 +61,36 @@ class CartController extends Controller
     public function store(Request $request)
     {
         //
+        $product = Product::findOrFail($request->id);
+
+
+      //if the item exist, update it. else, add a new one.
+       if ($items = $this->cart->getContent()){
+           foreach ($items as $item => $value){
+               if ($value->id == $product->id){
+                   $this->cart->update($item,['quantity'=>1]);
+                   return [
+                       'count' => $this->cart->getContent()->count()
+                   ];
+               }
+           }
+       }
+
+
+        $this->cart->add(array(
+            'id' => $product->id,
+            'name' => $product->name,
+            'price' => $product->price,
+            'quantity' => 1,
+            'attributes' => array(),
+            'associatedModel' => $product
+        ));
+
+        return [
+          'count' => $this->cart->getContent()->count()
+        ];
+
+
     }
 
     /**
@@ -78,7 +126,26 @@ class CartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+
+//      stop the execution of the script if user enter quantity less than zero
+        if ($request->quantity <= 0){
+            return;
+        }
+
+//        modify the quantity
+        $this->cart->update($id,[
+            'quantity'=>[
+                'relative' => false,
+                'value' => $request->quantity
+            ]
+        ]);
+
+//      more values can be returned later like shipping
+        return [
+            'subtotal'=> $this->cart->getSubTotal(),
+            'total'=> $this->cart->getTotal()
+        ];
+
     }
 
     /**
@@ -90,46 +157,20 @@ class CartController extends Controller
     public function destroy($id)
     {
         //
-    }
+        $this->cart->remove($id);
+        return redirect()->back();
 
+    }
 
 
     /**
-     * Add products to cart
-     * @param $id
+     * clear the current user cart
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function add($id){
-       $product = Product::findOrFail($id);
-       $userId = Auth::user()->id;
-
-      //if the item exist, update it. else, add a new one.
-       if ($items = Cart::session($userId)->getContent()){
-
-           foreach ($items as $item => $value){
-               if ($value->id == $product->id){
-                   Cart::session($userId)->update($item,['quantity'=>1]);
-//                   going to change return value to total cart products later when jQuery is implemented.
-                    return redirect()->back();
-               }
-           }
-
-       }
-
-           Cart::session($userId)->add(array(
-               'id' => $product->id,
-               'name' => $product->name,
-               'price' => $product->price,
-               'quantity' => 1,
-               'attributes' => array(),
-               'associatedModel' => $product
-           ));
-
-//        going to change return value to total cart products later when jQuery is implemented.
-          return redirect()->back();
+    public function clear(){
+        $this->cart->clear();
+        return redirect()->back();
     }
-
-
 
 
 }

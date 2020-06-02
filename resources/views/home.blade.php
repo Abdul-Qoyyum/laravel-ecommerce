@@ -20,6 +20,7 @@
 {{--        </div>--}}
 {{--    </div>--}}
     <div class="row" style="padding: 100px 0;">
+        <input type="hidden" name="_token" id="token" value="{{csrf_token()}}">
         @if($products)
             @foreach($products as $product)
         <div class="col-md-3 col-sm-6">
@@ -32,7 +33,7 @@
                     <ul class="social">
                         <li><a href="#"><i class="fa fa-shopping-bag"></i></a></li>
                         <li>
-                            <a href="{{route('cart.add',$product->id)}}"><i class="fa fa-shopping-cart"></i></a>
+                            <a class="addToCart"  id="{{$product->id}}"><i class="fa fa-shopping-cart"></i></a>
                         </li>
                     </ul>
                     <span class="product-new-label">New</span>
@@ -58,3 +59,19 @@
     </div>
 </div>
 @endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            $('.addToCart').click(function(e){
+                e.preventDefault();
+                let button = $(this);
+                let productId  = button.attr('id');
+                $.post('/cart',{id : productId,"_token":$('#token').val()},function (data) {
+                    //update the cart number
+                    $('.count').text(data.count);
+                });
+            });
+        });
+    </script>
+    @stop
