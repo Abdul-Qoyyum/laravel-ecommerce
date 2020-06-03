@@ -63,20 +63,6 @@ class CartController extends Controller
         //
         $product = Product::findOrFail($request->id);
 
-
-      //if the item exist, update it. else, add a new one.
-       if ($items = $this->cart->getContent()){
-           foreach ($items as $item => $value){
-               if ($value->id == $product->id){
-                   $this->cart->update($item,['quantity'=>1]);
-                   return [
-                       'count' => $this->cart->getContent()->count()
-                   ];
-               }
-           }
-       }
-
-
         $this->cart->add(array(
             'id' => $product->id,
             'name' => $product->name,
@@ -86,10 +72,9 @@ class CartController extends Controller
             'associatedModel' => $product
         ));
 
-        return [
+        return response([
           'count' => $this->cart->getContent()->count()
-        ];
-
+        ],200,[]);
 
     }
 
@@ -141,10 +126,10 @@ class CartController extends Controller
         ]);
 
 //      more values can be returned later like shipping
-        return [
+        return response([
             'subtotal'=> $this->cart->getSubTotal(),
             'total'=> $this->cart->getTotal()
-        ];
+        ],200,[]);
 
     }
 

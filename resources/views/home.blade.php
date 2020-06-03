@@ -63,6 +63,7 @@
 @section('scripts')
     <script>
         $(document).ready(function () {
+
             $('.addToCart').click(function(e){
                 e.preventDefault();
                 let button = $(this);
@@ -72,6 +73,7 @@
                     $('.count').text(data.count);
                 });
             });
+
         });
     </script>
     @stop

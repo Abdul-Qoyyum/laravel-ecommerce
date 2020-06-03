@@ -30,6 +30,13 @@ Route::middleware(['auth','verified'])->group(function (){
 
 });
 
+//Wishlist routes
+Route::middleware(['auth','verified'])->group(function (){
+
+    Route::resource('wishlist','WishlistController');
+
+});
+
 //Admin routes
 Route::middleware(['auth','verified','staff'])->prefix('admin')->group(function(){
 
