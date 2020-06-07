@@ -1,5 +1,6 @@
 {
     "name": "laravel/laravel",
+    "author":"Abdul Qoyyum",
     "type": "project",
     "description": "The Laravel Framework.",
     "keywords": [
