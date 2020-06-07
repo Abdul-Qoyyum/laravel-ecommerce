@@ -7,6 +7,8 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Database\Schema\Builder;
 
+use App\User;
+
 use Cart;
 
 class AppServiceProvider extends ServiceProvider
@@ -30,9 +32,15 @@ class AppServiceProvider extends ServiceProvider
     {
         //
         Builder::defaultStringLength(191);
+
         view()->composer('includes.navbar',function ($view){
-            $count = Auth::check() ? Cart::session(Auth::id())->getContent()->count() : 0;
-            $view->with('count', $count);
+            $cartTotal = Auth::check() ? Cart::session(Auth::id())->getContent()->count() : 0;
+            $wishlistTotal = Auth::check() ? app('wishlist')->getContent()->count() : 0;
+            $view->with(['cartTotal' =>$cartTotal,'wishlistTotal'=>$wishlistTotal]);
         });
+
+
     }
+
+
 }

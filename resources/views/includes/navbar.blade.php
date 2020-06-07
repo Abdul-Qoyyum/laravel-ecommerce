@@ -35,16 +35,21 @@
                         </li>
                     @endif
                 @else
-                    <li class="nav-item active">
-                        <a class="nav-link" href="{{route('cart.index')}}">Cart <span class="sr-only">(current)</span></a>
-                    </li>
                     <li class="nav-item">
                         <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                     <li class="nav-item">
+                        <a class="btn btn-success btn-sm" href="{{route('wishlist.index')}}">
+                            <i class="fa fa-shopping-bag"></i> Wishlist
+                            <span class="badge badge-light wishlist">
+                                {{$wishlistTotal}}
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a class="btn btn-success btn-sm" href="{{route('cart.index')}}">
                             <i class="fa fa-shopping-cart"></i> Cart
-                            <span class="badge badge-light count">{{$count}}</span>
+                            <span class="badge badge-light cart">{{$cartTotal}}</span>
                         </a>
                     </li>
 

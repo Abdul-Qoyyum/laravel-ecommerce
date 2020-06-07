@@ -96,8 +96,6 @@
                    processData: false,
                    contentType: 'application/json-patch+json',
                    success : function (data) {
-                      // continue return function here tomorrow...
-                      // console.log(data);
                        $('.subtotal').text(data.subtotal);
                       $('.total').text(data.total);
                    }

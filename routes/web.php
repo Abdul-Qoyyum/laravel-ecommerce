@@ -33,6 +33,10 @@ Route::middleware(['auth','verified'])->group(function (){
 //Wishlist routes
 Route::middleware(['auth','verified'])->group(function (){
 
+    Route::get('wishlist/clear','WishlistController@clearWishlist')->name('wishlist.clear');
+
+    Route::get('wishlist/cart/{id}','WishlistController@addToCart')->name('wishlist.cart');
+
     Route::resource('wishlist','WishlistController');
 
 });
