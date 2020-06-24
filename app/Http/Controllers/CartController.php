@@ -158,4 +158,8 @@ class CartController extends Controller
     }
 
 
+    public function checkout(){
+        return $this->cart->getContent();
+    }
+
 }

@@ -2,10 +2,11 @@
     "name": "laravel/laravel",
     "author":"Abdul Qoyyum",
     "type": "project",
-    "description": "The Laravel Framework.",
+    "description": "An eCommerce website with the laravel framework",
     "keywords": [
         "framework",
-        "laravel"
+        "laravel",
+        "eCommerce"
     ],
     "license": "MIT",
     "require": {
@@ -17,7 +18,8 @@
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
-        "laravelcollective/html": "^6.1"
+        "laravelcollective/html": "^6.1",
+        "stripe/stripe-php": "^7.36"
     },
     "require-dev": {
         "facade/ignition": "^2.0",

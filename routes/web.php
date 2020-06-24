@@ -21,17 +21,16 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-//cart routes
+Route::post('/webhook','TransactionController@hook')->name('transaction.hook');
+
+//Wishlist  and cart routes
 Route::middleware(['auth','verified'])->group(function (){
+
+    Route::get('cart/checkout','CartCheckoutController@checkout')->name('cart.checkout');
 
     Route::get('cart/clear','CartController@clear')->name('cart.clear');
 
     Route::resource('cart','CartController');
-
-});
-
-//Wishlist routes
-Route::middleware(['auth','verified'])->group(function (){
 
     Route::get('wishlist/clear','WishlistController@clearWishlist')->name('wishlist.clear');
 
@@ -39,7 +38,12 @@ Route::middleware(['auth','verified'])->group(function (){
 
     Route::resource('wishlist','WishlistController');
 
+    Route::get('/checkout/success/{session_id}','CartCheckoutController@success')->name('checkout.success');
+
+    Route::get('/checkout/cancel','CartCheckoutController@cancel')->name('checkout.cancel');
+
 });
+
 
 //Admin routes
 Route::middleware(['auth','verified','staff'])->prefix('admin')->group(function(){

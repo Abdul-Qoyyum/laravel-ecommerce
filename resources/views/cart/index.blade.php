@@ -3,7 +3,7 @@
     <div class="container mb-4">
         <div class="row">
             @if(count($items))
-            <div class="col-md-8 my-4">
+            <div class="col-md-7 my-4">
                 <div class="table-responsive">
                     <table class="table table-striped">
                         <thead>
@@ -35,7 +35,7 @@
                 </div>
             </div>
 
-            <div class="col-md-4 mt-4">
+            <div class="col-md-5 mt-4">
                 <div class="row">
                     <div class="col-sm-12">
                         <a class="btn btn-block btn-danger" href="{{route('cart.clear')}}">Clear Cart</a>
@@ -55,23 +55,13 @@
                         </div>
                         <hr>
                     </div>
-
-                    <div class="col-sm-12 mb-4">
-                        <div class="row justify-content-center">
-                            <i class="fab fa-cc-visa col-4" style="font-size: 50px; color:navy;"></i>
-                            <i class="fa fa-cc-amex col-4" style="font-size: 50px; color:blue;"></i>
-                            <i class="fa fa-cc-mastercard col-4" style="font-size: 50px; color:red;"></i>
-                        </div>
-                    </div>
-                    <div class="col-sm-12 text-right">
-                        <button class="btn btn-lg btn-block btn-success">Proceed to checkout</button>
-                    </div>
                 </div>
-
-
-
+{{--      stripe section --}}
+                {{csrf_field()}}
+                    <button class="d-flex justify-content-center btn btn-lg btn-block btn-primary checkout">Proceed to checkout</button>
+                <span class="error d-block text-center text-danger"></span>
+{{--      end stripe section--}}
             </div>
-        </div>
         @else
             <div class="row w-100 align-items-center justify-content-center" style="min-height: 60vh">
                 <div class="col-md-8">
@@ -83,25 +73,37 @@
     </div>
     @stop
 @section('scripts')
-    <script>
-        $(document).ready(function () {
-           $('.quantity').change(function () {
-               let item = $(this);
-               const patch = {quantity:item.val(),"_token": $('#token').val()};
-               let id = item.attr('id');
-               $.ajax({
-                   type: 'PATCH',
-                   url: `cart/${id}`,
-                   data: JSON.stringify(patch),
-                   processData: false,
-                   contentType: 'application/json-patch+json',
-                   success : function (data) {
-                       $('.subtotal').text(data.subtotal);
-                      $('.total').text(data.total);
-                   }
-               });
-           });
-        })
-    </script>
-
+    <script src="https://js.stripe.com/v3/"></script>
+    <script src="{{asset('js/cart.js')}}" data-rel-js></script>
+            <script type="text/javascript">
+                $(document).ready(function () {
+                    let stripe = Stripe("{{config('services.stripe.key')}}");
+                    $('.checkout').click(function (e) {
+                        e.preventDefault();
+                        //disable the button
+                        $(this).prop("disabled",true);
+                        const button = $(this);
+                        let initialText = button.html();
+                        //add spinner to button
+                        button.html(` <div class="spinner-border" role="status">
+                                        <span class="sr-only">Loading...</span>
+                                    </div>`);
+                        $.get("{{url('cart/checkout')}}",function (id) {
+                            stripe.redirectToCheckout({
+                                 sessionId: `${id}`
+                            }).then(function (result) {
+                                if(result.error.message){
+                                    //display the error message
+                                    $('.error').text(result.error.message);
+                                }
+                            });
+                        }).fail(function() {
+                            //enable the button again
+                            button.prop("disabled",false);
+                            button.html(initialText);
+                            $('.error').text("Something went wrong, Please try again :)");
+                        });
+                    });
+                });
+            </script>
     @stop

@@ -52,4 +52,14 @@ class User extends Authenticatable implements MustVerifyEmail
     public function role(){
         return $this->belongsTo('App\Role');
     }
+
+    /**
+     * Eloquent one to many relationship with transactions resource
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function transaction(){
+        return $this->hasMany('App\Transaction');
+    }
+
+
 }

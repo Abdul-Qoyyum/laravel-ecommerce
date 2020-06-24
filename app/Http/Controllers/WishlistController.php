@@ -150,6 +150,9 @@ class WishlistController extends Controller
         return redirect()->back();
     }
 
+
+
+
     /**
      * Clear user wishlist resource
      * @return \Illuminate\Http\RedirectResponse
