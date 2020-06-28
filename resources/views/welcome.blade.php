@@ -1,100 +1,64 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
 
-        <title>Laravel</title>
-
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
-
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
+@section('content')
+    <div style="margin-bottom: 10px;">
+        <div class="hero">
         </div>
-    </body>
-</html>
+        <div class="row">
+            @if(!$products->isEmpty())
+                <input type="hidden" name="_token" id="token" value="{{csrf_token()}}">
+                @foreach($products as $product)
+                    <div class="col-md-3 col-sm-6">
+                        <div class="product-grid2">
+                            <div class="product-image2">
+                                <a href="#">
+                                    <img class="pic-1" style="height: 300px;" src="{{$product->photo->first_url}}">
+                                    <img class="pic-2" style="height: 300px;" src="{{$product->photo->second_url}}">
+                                </a>
+                                <ul class="social">
+                                    <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                                    <li><a href="#"  class="addToWishlist" id="{{$product->id}}" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                                    <li><a href="#"  class="addToCart"  id="{{$product->id}}"   data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                                </ul>
+                                <a class="buy-now" href="">Buy now</a>
+                            </div>
+                            <div class="product-content">
+                                <h3 class="title"><a href="#">{{$product->name}}</a></h3>
+                                <span class="price">&#36; {{$product->price}}</span>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+            @endif
+        </div>
+    </div>
+@endsection
+
+@section('scripts')
+    <script>
+        $(document).ready(function () {
+            //add to cart
+            $('.addToCart').click(function(e){
+                e.preventDefault();
+                let button = $(this);
+                let productId  = button.attr('id');
+                $.post('/cart',{id : productId,"_token":$('#token').val()},function (data) {
+                    //update the cart number
+                    $('.cart').text(data.count);
+                });
+            });
+
+            //    add to wishlist
+            $('.addToWishlist').click(function(e){
+                e.preventDefault();
+                let bag = $(this);
+                let productId  = bag.attr('id');
+                $.post('/wishlist',{id : productId,"_token":$('#token').val()},function (data) {
+                    //update the wishlist number
+                    $('.wishlist').text(data.count);
+                });
+            });
+
+        });
+    </script>
+@stop

@@ -43,36 +43,35 @@
                             <ul class="dropmenu">
                                 <li><a href="#">About Us <span class="ion ion-ios-arrow-down"></span></a>
                                     <ul class="submenu">
-                                        <li><a href="about-us.html">About Us 1</a></li>
-                                        <li><a href="about-us-2.html">About Us 2</a></li>
+                                        <li><a href="#">About Us 1</a></li>
+                                        <li><a href="#">About Us 2</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Team <span class="ion ion-ios-arrow-down"></span></a>
                                     <ul class="submenu">
-                                        <li><a href="team.html">Team 1</a></li>
-                                        <li><a href="team-2.html">Team 2</a></li>
+                                        <li><a href="#">Team 1</a></li>
+                                        <li><a href="#">Team 2</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Services <span class="ion ion-ios-arrow-down"></span></a>
                                     <ul class="submenu">
-                                        <li><a href="services.html">Services 1</a></li>
-                                        <li><a href="services-2.html">Services 2</a></li>
+                                        <li><a href="#">Services 1</a></li>
+                                        <li><a href="#">Services 2</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Faqs <span class="ion ion-ios-arrow-down"></span></a>
                                     <ul class="submenu">
-                                        <li><a href="faqs.html">Faqs 1</a></li>
-                                        <li><a href="faqs-2.html">Faqs 2</a></li>
+                                        <li><a href="#">Faqs 1</a></li>
+                                        <li><a href="#">Faqs 2</a></li>
                                     </ul>
                                 </li>
                                 <li><a href="#">Contact Us <span class="ion ion-ios-arrow-down"></span></a>
                                     <ul class="submenu">
-                                        <li><a href="contact-us.html">Contact Us 1</a></li>
-                                        <li><a href="contact-us-2.html">Contact Us 2</a></li>
+                                        <li><a href="#">Contact Us 1</a></li>
+                                        <li><a href="#">Contact Us 2</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="career.html">Career</a></li>
-                                <li><a href="404-error.html">404 Error</a></li>
+                                <li><a href="#">Career</a></li>
                             </ul>
                         </li>
 
