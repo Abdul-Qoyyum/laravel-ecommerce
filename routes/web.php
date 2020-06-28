@@ -16,18 +16,18 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
 
     return view('welcome',['products'=>\App\Product::all()]);
-})->middleware('ssl');
+});
 
 Auth::routes(['verify'=>true]);
 
-Route::get('/home', 'HomeController@index')->name('home')->middleware('ssl');
+Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/category/{id}','HomeController@category')->name('home.category')->middleware('ssl');
+Route::get('/category/{id}','HomeController@category')->name('home.category');
 
-Route::post('/hook','TransactionController@hook')->name('transaction.hook')->middleware('ssl');
+Route::post('/hook','TransactionController@hook')->name('transaction.hook');
 
 //Wishlist  and cart routes
-Route::middleware(['auth','verified','ssl'])->group(function (){
+Route::middleware(['auth','verified'])->group(function (){
 
     Route::get('cart/checkout','CartCheckoutController@checkout')->name('cart.checkout');
 
@@ -49,7 +49,7 @@ Route::middleware(['auth','verified','ssl'])->group(function (){
 
 
 //Admin routes
-Route::middleware(['auth','verified','staff','ssl'])->prefix('admin')->group(function(){
+Route::middleware(['auth','verified','staff'])->prefix('admin')->group(function(){
 
     Route::get('/','AdminHomeController@index');
 
