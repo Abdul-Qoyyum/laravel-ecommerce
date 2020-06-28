@@ -6,6 +6,8 @@ use Closure;
 
 class CheckRole
 {
+
+    protected $customer_id = 21;
     /**
      * Handle an incoming request.
      *
@@ -16,7 +18,7 @@ class CheckRole
     public function handle($request, Closure $next)
     {
         //Only grant staffs passage to the admin dashboard
-        if ($request->user()->role_id != 3){
+        if ($request->user()->role_id != $this->customer_id){
             return $next($request);
         }
           return redirect('/home');
