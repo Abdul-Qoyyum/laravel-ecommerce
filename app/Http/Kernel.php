@@ -20,8 +20,6 @@ class Kernel extends HttpKernel
         \Illuminate\Foundation\Http\Middleware\ValidatePostSize::class,
         \App\Http\Middleware\TrimStrings::class,
         \Illuminate\Foundation\Http\Middleware\ConvertEmptyStringsToNull::class,
-        // appending custom middleware
-        'App\Http\Middleware\HttpsProtocol',
     ];
 
     /**
@@ -65,5 +63,8 @@ class Kernel extends HttpKernel
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'staff' => \App\Http\Middleware\CheckRole::class,
+         // appending custom middleware
+        'ssl' =>  \App\Http\Middleware\HttpsProtocol::class,
+
     ];
 }
