@@ -2,7 +2,11 @@
 
 use Illuminate\Support\Str;
 
+<<<<<<< HEAD
 $DATABASE_URL = parse_url(env("CLEARDB_DATABASE_URL"));
+=======
+$DATABASE_URL = parse_url(env('DB_URL'));
+>>>>>>> 0971a38d411135472c8c4569401aabf92f7fb1fe
 
 return [
 
