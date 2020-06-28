@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Product;
+
+use App\Category;
 
 class HomeController extends Controller
 {
@@ -26,6 +26,16 @@ class HomeController extends Controller
     public function index()
     {
         $products = Product::all();
+        return view('home',compact('products'));
+    }
+
+    /**
+     * get the resource in the product category
+     * @param $slug
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
+    public function category($slug){
+        $products = Category::findBySlugOrFail($slug)->products;
         return view('home',compact('products'));
     }
 }

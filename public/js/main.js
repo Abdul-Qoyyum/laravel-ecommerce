@@ -1,5 +1,3 @@
-
-
 $(document).ready(function(){
     /*==========================*/
     /* Nav */
@@ -18,11 +16,10 @@ $(document).ready(function(){
     /* Mobile Nav */
     /*==========================*/
     if ($(window).width() < 1051) {
-
         $('nav ul li a').click(function(){
             $(this).next('ul').toggle();
             $(this).toggleClass('active');
-
         });
     }
+
 });

@@ -59,13 +59,13 @@ class AdminCategoriesController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  int  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $category = Category::findOrFail($id);
+        $category = Category::findBySlugOrFail($slug);
         return view('admin.categories.edit',compact('category'));
     }
 
@@ -81,20 +81,21 @@ class AdminCategoriesController extends Controller
         //
          $request->validate(['name'=>['required','unique:categories','min:2']]);
          $category = Category::findOrfail($id);
+         $category->slug = null;
          $category->update($request->all());
          return redirect('admin/categories');
     }
 
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
+     * Remove the specified resource from storage
+     * @param $slug
+     * @return \Illuminate\Http\RedirectResponse
+     * @throws \Exception
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
         //
-        Category::findOrFail($id)->delete();
+        Category::findBySlugOrFail($slug)->delete();
         return redirect()->back();
     }
 }

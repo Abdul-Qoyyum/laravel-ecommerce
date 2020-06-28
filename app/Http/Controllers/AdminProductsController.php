@@ -84,13 +84,13 @@ class AdminProductsController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  string  $slug
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit($slug)
     {
         //
-        $product = Product::findOrFail($id);
+        $product = Product::findBySlugOrFail($slug);
         $select = $this->selectCategories();
         return view('admin.products.edit',compact('product','select'));
     }
@@ -99,13 +99,14 @@ class AdminProductsController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductRequest $request, $id)
+    public function update(UpdateProductRequest $request, $slug)
     {
         $input = $request->all();
-        $product = Product::findOrFail($id);
+        $product = Product::findBySlugOrFail($slug);
+        $product->slug = null;
 
         if ($request->file('first_url')){
             $first_url = $this->updateProductImage($request->file('first_url'),$product->photo->first_url);
@@ -124,16 +125,16 @@ class AdminProductsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  string $slug
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy($slug)
     {
         //
-        $product = Product::findOrFail($id);
+        $product = Product::findBySlugOrFail($slug);
         $this->deleteProductImage($product->photo->first_url);
         $this->deleteProductImage($product->photo->second_url);
-        $product->destroy($id);
+        $product->destroy($product->id);
         return redirect()->back();
     }
 

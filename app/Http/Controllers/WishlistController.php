@@ -88,7 +88,6 @@ class WishlistController extends Controller
     public function show($id)
     {
         //
-        return "Show hijacked the request.";
     }
 
     /**

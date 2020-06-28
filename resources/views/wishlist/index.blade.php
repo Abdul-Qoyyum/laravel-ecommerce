@@ -19,7 +19,7 @@
                             <input type="hidden" name="_token" id="token" value="{{ csrf_token() }}">
                             @foreach($items as $item)
                                 <tr>
-                                    <td class="img-wrapper"><img height="100px" width="100px" class="img-round" src="{{$item->associatedModel->photo->first_url}}" /> </td>
+                                    <td class="img-wrapper"><img height="100px" width="100px" class="img-round" src="{{$item->associatedModel ?: $item->associatedModel->photo->first_url}}" alt="{{$item->name}}.png"/> </td>
                                     <td>{{$item->name}}</td>
                                     <td class="text-right text-center">{{$item->quantity}}</td>
                                     <td class="text-right text-center">$ {{$item->price}} <small>each</small></td>

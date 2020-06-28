@@ -1,46 +1,35 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row" style="padding: 100px 0;">
+    <div style="margin-bottom: 10px;">
+        <div class="hero">
+    </div>
+    <div class="row">
         @if($products)
             <input type="hidden" name="_token" id="token" value="{{csrf_token()}}">
-        @foreach($products as $product)
-        <div class="col-md-3 col-sm-6">
-            <div class="product-grid3">
-                <div class="product-image3">
-                    <a href="#">
-                        <img class="pic-1" src="{{$product->photo->first_url}}">
-                        <img class="pic-2" src="{{$product->photo->second_url}}">
-                    </a>
-                    <ul class="social">
-                        <li>
-                            <a class="addToWishlist" id="{{$product->id}}" href="#"><i class="fa fa-shopping-bag"></i></a>
-                        </li>
-                        <li>
-                            <a class="addToCart"  id="{{$product->id}}" href="#"><i class="fa fa-shopping-cart"></i></a>
-                        </li>
-                    </ul>
-                    <span class="product-new-label">New</span>
-                </div>
-                <div class="product-content">
-                    <h3 class="title"><a href="#">{{$product->name}}</a></h3>
-                    <div class="price">
-                        ${{$product->price}}
-                        <span>$75.00</span>
+            @foreach($products as $product)
+                <div class="col-md-3 col-sm-6">
+                <div class="product-grid2">
+                    <div class="product-image2">
+                        <a href="#">
+                            <img class="pic-1" style="height: 300px;" src="{{$product->photo->first_url}}">
+                            <img class="pic-2" style="height: 300px;" src="{{$product->photo->second_url}}">
+                        </a>
+                        <ul class="social">
+                            <li><a href="#" data-tip="Quick View"><i class="fa fa-eye"></i></a></li>
+                            <li><a href="#"  class="addToWishlist" id="{{$product->id}}" data-tip="Add to Wishlist"><i class="fa fa-shopping-bag"></i></a></li>
+                            <li><a href="#"  class="addToCart"  id="{{$product->id}}"   data-tip="Add to Cart"><i class="fa fa-shopping-cart"></i></a></li>
+                        </ul>
+                        <a class="buy-now" href="">Buy now</a>
                     </div>
-                    <ul class="rating">
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star"></li>
-                        <li class="fa fa-star disable"></li>
-                        <li class="fa fa-star disable"></li>
-                    </ul>
+                    <div class="product-content">
+                        <h3 class="title"><a href="#">{{$product->name}}</a></h3>
+                        <span class="price">&#36; {{$product->price}}</span>
+                    </div>
                 </div>
             </div>
-        </div>
-            @endforeach
-        @endif
+                @endforeach
+            @endif
     </div>
 </div>
 @endsection
@@ -69,9 +58,6 @@
                     $('.wishlist').text(data.count);
                 });
             });
-
-
-
 
         });
     </script>

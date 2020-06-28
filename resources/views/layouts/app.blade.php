@@ -17,6 +17,17 @@
     <link href="https://fonts.googleapis.com/css?family=Poppins:400,500,600,700" rel="stylesheet">
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <style>
+        @media(min-width: 768px)  {
+            .hero{
+                height:80vh;
+                background-image:url('{{asset("img/hero.png")}}');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: cover;
+            }
+        }
+    </style>
     <!-- Main Css -->
     <link rel="stylesheet" href="{{asset('css/main.css')}}" />
 </head>
@@ -87,28 +98,10 @@
 
 
     <div class="container">
-        <ul class="foote_bottom_ul_amrc">
-            <li><a href="#">Home</a></li>
-            <li><a href="#">About</a></li>
-            <li><a href="#">Services</a></li>
-            <li><a href="#">Pricing</a></li>
-            <li><a href="#">Blog</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
-
-        <!--foote_bottom_ul_amrc ends here-->
         <p class="text-center">Copyright &copy;
             <script>
                 document.write(new Date().getFullYear())
             </script> | Designed With love by <a href="#">Techwise</a> All Rights Reserved.</p>
-
-        <ul class="social_footer_ul">
-            <li><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-            <li><a href="#"><i class="fab fa-twitter"></i></a></li>
-            <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
-            <li><a href="#"><i class="fab fa-instagram"></i></a></li>
-        </ul>
-        <!--social_footer_ul ends here-->
     </div>
 
 </footer>

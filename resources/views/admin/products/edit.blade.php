@@ -11,7 +11,7 @@
                         <h5 class="title">Update Product</h5>
                     </div>
                     <div class="card-body">
-                        {!! Form::model($product,['route'=>['products.update',$product->id], 'files'=>true,'id'=>'createProductForm','method'=>'PATCH']) !!}
+                        {!! Form::model($product,['route'=>['products.update',$product->slug], 'files'=>true,'id'=>'createProductForm','method'=>'PATCH']) !!}
                         <div class="row">
                             <div class="col-md-8 pr-1 pl-1">
                                 <div class="form-group">

@@ -35,11 +35,11 @@
                                     <td class="td-actions row justify-content-center align-items-center">
                                         <div class="col-md-8">
                                             <div class="row justify-content-between align-items-center" style="height: 150px;">
-                                        {!! Form::open(['route'=>['products.edit',$product->id],'method'=>'GET']) !!}
+                                        {!! Form::open(['route'=>['products.edit',$product->slug],'method'=>'GET']) !!}
                                             {!! Form::button('<i class="now-ui-icons ui-2_settings-90"></i>',['type'=>'submit','class'=>'btn btn-success','rel'=>'tooltip'])!!}
                                         {!! Form::close() !!}
 
-                                        {!! Form::open(['route'=>['products.destroy',$product->id],'method'=>'DELETE']) !!}
+                                        {!! Form::open(['route'=>['products.destroy',$product->slug],'method'=>'DELETE']) !!}
                                                 {!!Form::button('<i class="now-ui-icons ui-1_simple-remove"></i>',['type'=>'submit','class'=>'btn btn-danger','rel'=>'tooltip'])!!}
                                                 {!! Form::close() !!}
                                             </div>

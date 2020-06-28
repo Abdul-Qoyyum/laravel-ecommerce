@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
-
 use App\Transaction;
 
 use App\User;
@@ -48,12 +46,19 @@ class TransactionController extends Controller
     }
 
 
-
+    /**
+     * log event payload from stripe to event.json
+     * @param $event
+     */
     public function handleEvent($event){
            file_put_contents(base_path() . '/event.json',$event);
     }
 
 
+    /**
+     * logs checkout payload from stripe to session.json
+     * @param $session
+     */
     public function handleCheckoutSession($session){
         file_put_contents(base_path() . '/session.json',$session);
     }

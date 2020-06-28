@@ -21,7 +21,9 @@ Auth::routes(['verify'=>true]);
 
 Route::get('/home', 'HomeController@index')->name('home');
 
-Route::post('/webhook','TransactionController@hook')->name('transaction.hook');
+Route::get('/category/{id}','HomeController@category')->name('home.category');
+
+Route::post('/hook','TransactionController@hook')->name('transaction.hook');
 
 //Wishlist  and cart routes
 Route::middleware(['auth','verified'])->group(function (){

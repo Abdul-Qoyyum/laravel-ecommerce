@@ -7,7 +7,7 @@ use Illuminate\Support\ServiceProvider;
 
 use Illuminate\Database\Schema\Builder;
 
-use App\User;
+use App\Category;
 
 use Cart;
 
@@ -36,7 +36,8 @@ class AppServiceProvider extends ServiceProvider
         view()->composer('includes.navbar',function ($view){
             $cartTotal = Auth::check() ? Cart::session(Auth::id())->getContent()->count() : 0;
             $wishlistTotal = Auth::check() ? app('wishlist')->getContent()->count() : 0;
-            $view->with(['cartTotal' =>$cartTotal,'wishlistTotal'=>$wishlistTotal]);
+            $categories = Category::all();
+            $view->with(['cartTotal' =>$cartTotal,'wishlistTotal'=>$wishlistTotal,'categories'=>$categories]);
         });
 
 

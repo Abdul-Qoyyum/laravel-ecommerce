@@ -59,11 +59,11 @@
                                 <td class="text-capitalize">{{$category->name}}</td>
                                 <td>{{$category->created_at->diffForHumans()}}</td>
                                 <td class="td-actions row">
-                                    {!! Form::open(['route'=>['categories.edit',$category->id],'method'=>'get']) !!}
+                                    {!! Form::open(['route'=>['categories.edit',$category->slug],'method'=>'get']) !!}
                                       {!! Form::button('<i class="now-ui-icons ui-2_settings-90"></i>',['type' => 'submit','class'=>'ml-1 btn btn-success mb-2 col-xs-6','rel'=>'tooltip']) !!}
                                     {!! Form::close() !!}
 
-                                {!! Form::open(['route'=>['categories.destroy',$category->id],'method'=>'delete']) !!}
+                                {!! Form::open(['route'=>['categories.destroy',$category->slug],'method'=>'delete']) !!}
                                       {!! Form::button('<i class="now-ui-icons ui-1_simple-remove"></i>',['class'=>'ml-1 btn btn-danger col-xs-6','type' => 'submit','rel'=>'tooltip']) !!}
                                     {!! Form::close() !!}
                                 </td>
