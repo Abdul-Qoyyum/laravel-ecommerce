@@ -3,17 +3,13 @@
         <div class="row">
             <div class="col-sm-12">
                 <div class="logo"><a href="{{url('/home')}}" class="animsition-link">Ecommerce Logo</a></div>
-                @guest
-                @if (Route::has('register'))
-                @endif
-                    @else
                     <div class="header-cart"><a class="cart-contents ml-2" href="{{route('wishlist.index')}}" title="View your wishlist">
                             <i class="fa fa-heart" style="font-size:20px" aria-hidden="true"></i><span class='badge badge-warning wishlist' id='lblwishCount'>{{$wishlistTotal}}</span></a>
                         <a class="cart-contents" href="{{route('cart.index')}}" title="View your shopping cart"><i class="fa" style="font-size:20px">&#xf07a;</i>
                             <span class='badge badge-warning cart' id='lblCartCount'>{{$cartTotal}}</span></a></div>
                     <div class="nav-menu-icon"><a href="#" class=""><i></i></a>
                     </div>
-                @endguest
+
                 <nav class="">
                     <ul class="menu">
                         <li>

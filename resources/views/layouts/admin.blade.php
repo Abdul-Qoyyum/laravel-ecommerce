@@ -19,7 +19,12 @@
     <!-- CSS Just for demo purpose, don't include it in your project -->
     <link href="{{asset('assets/demo/demo.css')}}" rel="stylesheet" />
     <!-- Main Css -->
-    <link rel="stylesheet" href="{{asset('css/main.css')}}" />
+    <style type="text/css">
+        .form-group .error{
+            color : #ff0000;
+            border-color: #ff0000;
+        }
+    </style>
 </head>
 
 <body class="">
